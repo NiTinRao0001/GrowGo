@@ -5,12 +5,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Plant Care Tracker</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Martel+Sans:wght@200;300;400;600;700;800;900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Martel+Sans:wght@200;300;400;600;700;800;900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Cascadia+Code:ital,wght@0,200..700;1,200..700&family=Martel+Sans:wght@200;300;400;600;700;800;900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+    :root {
+      --primary-green: #3a7d44;
+      --secondary-green: #6a9c78;
+      --light-green: #e8f5e9;
+      --dark-green: #2d5a36;
+      --accent-orange: #e67e22;
+      --light-orange: #fdf0e6;
+      --text-dark: #333;
+      --text-medium: #555;
+      --text-light: #777;
+      --white: #ffffff;
+      --light-gray: #f5f5f5;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+      --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+      --border-radius-sm: 8px;
+      --border-radius-md: 12px;
+      --border-radius-lg: 16px;
+      --transition: all 0.3s ease;
+    }
 
     * {
       margin: 0;
@@ -19,362 +36,740 @@
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #333;
-      background-color: #f9f9f9;
+      font-family: 'Nunito', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text-dark);
+      background-color: var(--light-gray);
       line-height: 1.6;
     }
 
-    .logo {
+    /* Header & Navigation */
+    .header-container {
+      background-color: var(--white);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-bar {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      margin: 10px 20px;
+      padding: 15px 5%;
+      max-width: 1400px;
+      margin: 0 auto;
     }
 
     .logo img {
-      width: 150px;
+      height: 50px;
+      transition: var(--transition);
     }
 
-    .header {
-      background-image: url('https://img.freepik.com/free-photo/indoor-plants-studio_23-2151022053.jpg');
+    .logo img:hover {
+      transform: scale(1.05);
+    }
+
+    .datetime-box {
+      background-color: var(--light-green);
+      padding: 10px 16px;
+      border-radius: var(--border-radius-sm);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--dark-green);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .datetime-box i {
+      color: var(--primary-green);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), 
+                  url('https://img.freepik.com/free-photo/indoor-plants-studio_23-2151022053.jpg');
       background-size: cover;
       background-position: center;
-      height: 250px;
-      margin: 10px 20px 20px;
-      border-radius: 12px;
+      height: 300px;
+      margin: 0 auto 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--border-radius-md);
+      position: relative;
+      overflow: hidden;
     }
 
-    .container {
+    .hero-content {
+      text-align: center;
+      color: var(--white);
       padding: 20px;
+      z-index: 2;
     }
 
-    h1 {
-      font-size: 2em;
-      margin-top: 0;
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
 
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      max-width: 700px;
+    }
+
+    /* Weather Bar */
+    .weather-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: var(--light-green);
+      padding: 12px 5%;
+      margin: 0 auto;
+      max-width: 1400px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--dark-green);
+      box-shadow: var(--shadow-sm);
+      border-radius: 0 0 var(--border-radius-md) var(--border-radius-md);
+    }
+
+    .temperature {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 20px;
+    }
+
+    .weather-status {
+      text-align: right;
+      font-style: italic;
+    }
+
+    /* Main Content */
+    .container {
+      padding: 20px 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      color: var(--primary-green);
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 3px;
+      background-color: var(--accent-orange);
+    }
+
+    /* Plant Grid */
     .plant-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+      margin-bottom: 50px;
     }
 
     .plant-card {
-      background-color: rgb(234, 239, 232);
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(117, 50, 50, 0.1);
+      background-color: var(--white);
+      border-radius: var(--border-radius-md);
+      box-shadow: var(--shadow-sm);
       overflow: hidden;
-      padding-bottom: 10px;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .plant-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
     }
 
     .plant-card img {
       width: 100%;
-      height: 290px;
+      height: 250px;
       object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .plant-card:hover img {
+      opacity: 0.9;
     }
 
     .plant-info {
-      padding: 15px;
+      padding: 20px;
     }
 
     .plant-title {
-      font-weight: bold;
-      margin-bottom: 10px;
+      font-weight: 800;
+      margin-bottom: 15px;
+      color: var(--primary-green);
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 15px;
     }
 
     .tag {
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 6px;
-      font-size: 13px;
-      margin: 2px 3px 0 0;
-      color: rgb(0, 0, 0);
-      font-weight: 600;
-    }
-
-    /* 
-    .tag.gray { background-color: #888; }
-    .tag.red { background-color: #e74c3c; }
-    .tag.green { background-color: #2ecc71; }
-    .tag.orange { background-color: #e67e22; }
-    .tag.blue { background-color: #3498db; }
-    .tag.yellow { background-color: #f1c40f; }
-    .tag.purple { background-color: #9b59b6; }
-    .tag.pink { background-color: #fd79a8; }
-    .tag.brown { background-color: #a0522d; } */
-
-    .section {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 60px 100px;
-      flex-wrap: wrap;
+      padding: 5px 10px;
+      border-radius: var(--border-radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      gap: 5px;
     }
 
-    .top-section {
-      background-color: #f3f8f3;
+    .tag.water {
+      background-color: #e3f2fd;
+      color: #1976d2;
     }
 
-    .bottom-section {
-      background-color: #fff;
+    .tag.light {
+      background-color: #fff8e1;
+      color: #ff8f00;
     }
 
-    .left-img img,
-    .right-img img {
-      max-width: 100%;
-      height: auto;
+    .tag.care {
+      background-color: #e8f5e9;
+      color: #2e7d32;
     }
 
-    .text-content {
-      max-width: 550px;
+    .tag.date {
+      background-color: #f3e5f5;
+      color: #8e24aa;
     }
 
-    .green {
-      color: #4CAF50;
-      font-weight: bold;
-    }
-
-    .orange {
-      color: #D2691E;
-      font-weight: bold;
-    }
-
-    button {
-      background: none;
-      border: 2px solid #D2691E;
-      padding: 10px 20px;
-      color: #D2691E;
-      font-weight: bold;
-      cursor: pointer;
-      border-radius: 5px;
-      transition: 0.3s;
-      margin-top: 20px;
-    }
-
-    button:hover {
-      background-color: #D2691E;
-      color: white;
-    }
-
-    @media (max-width: 768px) {
-      .section {
-        flex-direction: column;
-        text-align: center;
-        padding: 40px 20px;
-      }
-
-      .text-content {
-        max-width: 100%;
-        margin-bottom: 30px;
-      }
-    }
-
-    .footer {
-      background-color: #f4f8f4;
-      padding: 40px 0 20px;
-      text-align: center;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    }
-
-    .social-icons {
-      margin-bottom: 20px;
-    }
-
-    .social-icons a {
+    /* Buttons */
+    .btn {
       display: inline-block;
-      margin: 0 10px;
-      color: #000;
-      background-color: white;
-      width: 40px;
-      height: 40px;
-      line-height: 40px;
-      border-radius: 50%;
+      padding: 10px 20px;
+      font-weight: 600;
+      border-radius: var(--border-radius-sm);
+      cursor: pointer;
+      transition: var(--transition);
       text-align: center;
+      border: none;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-green);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--dark-green);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 2px solid var(--accent-orange);
+      color: var(--accent-orange);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--accent-orange);
+      color: var(--white);
     }
 
     .notify-btn {
       display: block;
-      margin: 20px auto 0;
+      width: 100%;
       padding: 10px 15px;
-      background-color: #f02d2d;
-      color: rgb(255, 255, 255);
+      background-color: var(--primary-green);
+      color: var(--white);
       border: none;
-      border-radius: 8px;
+      border-radius: var(--border-radius-sm);
       cursor: pointer;
-      font-weight: bold;
-      bottom: 10px;
+      font-weight: 600;
+      margin-top: 15px;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
 
     .notify-btn:hover {
-      background-color: #5f5f5f;
+      background-color: var(--dark-green);
+      transform: translateY(-2px);
     }
+
+    /* Plant Identification Section */
+    .identify-section {
+      background-color: var(--white);
+      padding: 30px;
+      border-radius: var(--border-radius-md);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 40px;
+    }
+
+    .identify-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .camera-container {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .result-container {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    #video, #canvas {
+      width: 100%;
+      border-radius: var(--border-radius-sm);
+      background-color: #000;
+    }
+
+    #plant-result {
+      padding: 20px;
+      background-color: var(--light-green);
+      border-radius: var(--border-radius-sm);
+      margin-top: 20px;
+      min-height: 150px;
+    }
+
+    .upload-btn {
+      margin-top: 15px;
+    }
+
+    /* Informational Sections */
+    .info-section {
+      padding: 60px 5%;
+      margin: 40px 0;
+    }
+
+    .top-section {
+      background-color: var(--light-green);
+    }
+
+    .bottom-section {
+      background-color: var(--white);
+    }
+
+    .section-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-img {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .section-img img {
+      width: 100%;
+      border-radius: var(--border-radius-md);
+      box-shadow: var(--shadow-md);
+    }
+
+    .text-content {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .text-content h1 {
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+
+    .text-content p {
+      margin-bottom: 25px;
+      color: var(--text-medium);
+      font-size: 1.1rem;
+    }
+
+    .green {
+      color: var(--primary-green);
+    }
+
+    .orange {
+      color: var(--accent-orange);
+    }
+
+    /* Footer */
+    .footer {
+      background-color: var(--dark-green);
+      color: var(--white);
+      padding: 50px 5% 20px;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .social-icons {
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: var(--white);
+      transition: var(--transition);
+    }
+
+    .social-icons a:hover {
+      background-color: var(--primary-green);
+      transform: translateY(-3px);
+    }
+
+    .footer p {
+      margin-top: 20px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header-bar {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 20px;
+      }
+
+      .hero {
+        height: 250px;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .weather-bar {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+      }
+
+      .section-content {
+        flex-direction: column;
+      }
+
+      .text-content {
+        order: 2;
+      }
+
+      .section-img {
+        order: 1;
+      }
+
+      .plant-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        height: 200px;
+      }
+
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .plant-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .datetime-box {
+        font-size: 14px;
+        padding: 8px 12px;
+      }
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .plant-card, .info-section, .identify-section {
+      animation: fadeIn 0.6s ease-out forwards;
+    }
+
+    .plant-card:nth-child(2) { animation-delay: 0.1s; }
+    .plant-card:nth-child(3) { animation-delay: 0.2s; }
+    .plant-card:nth-child(4) { animation-delay: 0.3s; }
+    .plant-card:nth-child(5) { animation-delay: 0.4s; }
   </style>
 </head>
 
 <body>
-
-  <div class="logo">
-    <img src="img/gglogo.png" alt="GrowGo Logo">
+  <div class="header-container">
+    <div class="header-bar">
+      <div class="logo">
+        <img src="logo.png" alt="GrowGo Logo" />
+      </div>
+      <div class="datetime-box">
+        <i class="fas fa-calendar-alt"></i>
+        <span id="date"></span> 
+        <i class="fas fa-clock"></i>
+        <span id="time"></span>
+      </div>
+    </div>
+    
+    <div class="weather-bar">
+      <div class="temperature" id="temperature">
+        <i class="fas fa-thermometer-half"></i>
+        <span>Loading...</span>
+      </div>
+      <div class="weather-status" id="weatherStatus">
+        <i class="fas fa-cloud-sun"></i>
+        <span>Fetching weather status...</span>
+      </div>
+    </div>
   </div>
 
-  <div class="header"></div>
+  <div class="hero">
+    <div class="hero-content">
+      <h1>Your Personal Plant Care Companion</h1>
+      <p>Never forget to water your plants again with our smart reminders and care tips</p>
+    </div>
+  </div>
 
   <div class="container">
-    <h1>GrowGo Tracker</h1>
-    <h3></h3>
-
+    <h2 class="section-title">Your Plants</h2>
+    
     <div class="plant-grid">
-      <!-- Reusable plant cards -->
-      <!-- Example Plant Card -->
+      <!-- Croton -->
       <div class="plant-card">
-        <a href="Plants-detail/corton.html"> <img src="Img/croton.jpeg" alt="Croton"> </a>
+        <a href="Plants-detail/corton.html"> 
+          <img src="Img/croton.jpeg" alt="Croton">
+        </a>
         <div class="plant-info">
-          <div class="plant-title">🌱 Croton </div>
-          <!-- <span class="tag green">👌 OK but keep an eye</span> -->
-          <span class="tag blue">💧 3x per Week</span>
-          <!-- <span class="tag orange">Whenever Soil is Dry</span> -->
-          <!-- <span class="tag yellow">📅 Oct 23, 2024</span> -->
-          <!-- <span class="tag purple">Medium</span> -->
-          <span class="tag brown">☀️ Indirect Sunlight</span>
-          <!-- <span class="tag blue">Mist 3x per Week</span> -->
-
+          <div class="plant-title">
+            <i class="fas fa-seedling"></i>
+            Croton
+          </div>
+          <div class="tags-container">
+            <span class="tag water">
+              <i class="fas fa-tint"></i> 3x per Week
+            </span>
+            <span class="tag light">
+              <i class="fas fa-sun"></i> Indirect Sunlight
+            </span>
+          </div>
           <button class="notify-btn" onclick="requestNotificationPermission()">
-            🔔 Remind Me
+            <i class="fas fa-bell"></i> Remind Me
           </button>
-
         </div>
       </div>
+
+      <!-- Money Plant -->
       <div class="plant-card">
-        <a href="Plants-detail/moneyplant.html"> <img src="Img/money plant.jpeg" alt="Money Plant"> </a>
+        <a href="Plants-detail/moneyplant.html"> 
+          <img src="Img/money plant.jpeg" alt="Money Plant">
+        </a>
         <div class="plant-info">
-          <div class="plant-title">🌿 Money Plant</div>
-          <!-- <span class="tag green">❤️ Healthy</span> -->
-          <span class="tag blue">💧 3x per Week</span>
-          <!-- <span class="tag orange">📅 Oct 23, 2024</span> -->
-          <span class="tag yellow">☀️ Indirect Sunlight</span>
-          <!-- <span class="tag purple">Medium</span>
-          <span class="tag brown">High</span>
-          <span class="tag blue">Mist Daily</span> -->
-
+          <div class="plant-title">
+            <i class="fas fa-leaf"></i>
+            Money Plant
+          </div>
+          <div class="tags-container">
+            <span class="tag water">
+              <i class="fas fa-tint"></i> 3x per Week
+            </span>
+            <span class="tag light">
+              <i class="fas fa-sun"></i> Indirect Sunlight
+            </span>
+          </div>
           <button class="notify-btn" onclick="requestNotificationPermission()">
-            🔔 Remind Me
+            <i class="fas fa-bell"></i> Remind Me
           </button>
-
         </div>
       </div>
 
       <!-- Snake Plant -->
       <div class="plant-card">
-        <a href="Plants-detail/snake.html"> <img src="Img/snake plant.jpg" alt="Snake Plant"> </a>
+        <a href="Plants-detail/snake.html"> 
+          <img src="Img/snake plant.jpg" alt="Snake Plant">
+        </a>
         <div class="plant-info">
-          <div class="plant-title">🌵 Snake Plant</div>
-          <!-- <span class="tag red">❗ Unhealthy - Watch Out!!!</span> -->
-          <span class="tag blue">💧 3x per week</span>
-          <!-- <span class="tag orange">📅 Oct 8, 2024</span> -->
-          <span class="tag yellow">☀️ Indirect Sunlight</span>
-          <!-- <span class="tag brown">High</span>
-          <span class="tag purple">Medium</span>
-          <span class="tag gray">Don’t Mist</span> -->
-
+          <div class="plant-title">
+            <i class="fas fa-spa"></i>
+            Snake Plant
+          </div>
+          <div class="tags-container">
+            <span class="tag water">
+              <i class="fas fa-tint"></i> 3x per Week
+            </span>
+            <span class="tag light">
+              <i class="fas fa-sun"></i> Indirect Sunlight
+            </span>
+          </div>
           <button class="notify-btn" onclick="requestNotificationPermission()">
-            🔔 Remind Me
+            <i class="fas fa-bell"></i> Remind Me
           </button>
-
         </div>
       </div>
 
+      <!-- Areca Palm -->
       <div class="plant-card">
-        <a href="Plants-detail/areca.html"> <img src="Img/areca palm.jpg" alt="Areca Palm"> </a>
+        <a href="Plants-detail/areca.html"> 
+          <img src="Img/areca palm.jpg" alt="Areca Palm">
+        </a>
         <div class="plant-info">
-          <div class="plant-title"> Areca palm</div>
-          <!-- <span class="tag red">❗ Unhealthy - Watch Out!!!</span> -->
-          <span class="tag blue">💧 3x per week</span>
-          <!-- <span class="tag orange">📅 Oct 8, 2024</span> -->
-          <span class="tag yellow">☀️ Indirect Sunlight</span>
-          <!-- <span class="tag brown">High</span>
-          <span class="tag purple">Medium</span>
-          <span class="tag gray">Don’t Mist</span> -->
-
+          <div class="plant-title">
+            <i class="fas fa-tree"></i>
+            Areca Palm
+          </div>
+          <div class="tags-container">
+            <span class="tag water">
+              <i class="fas fa-tint"></i> 3x per Week
+            </span>
+            <span class="tag light">
+              <i class="fas fa-sun"></i> Indirect Sunlight
+            </span>
+          </div>
           <button class="notify-btn" onclick="requestNotificationPermission()">
-            🔔 Remind Me
+            <i class="fas fa-bell"></i> Remind Me
           </button>
-
         </div>
       </div>
 
+      <!-- Coming Soon -->
       <div class="plant-card">
-        <a href=""> <img src="Img/coming soon.png" alt="Coming Soon"> </a>
-        <!-- <div class="plant-info">
-          <div class="plant-title"></div>
-          <span class="tag red">❗ Unhealthy - Watch Out!!!</span>
-          <span class="tag blue">💧 3x per week</span>
-          <span class="tag orange">📅 Oct 8, 2024</span>
-          <span class="tag yellow">☀️ Indirect Sunlight</span>
-          <span class="tag brown">High</span>
-          <span class="tag purple">Medium</span>
-          <span class="tag gray">Don’t Mist</span>
-
-          <button class="notify-btn" onclick="requestNotificationPermission()">
-            🔔 Remind Me
+        <img src="Img/coming soon.png" alt="Coming Soon">
+        <div class="plant-info">
+          <div class="plant-title">
+            <i class="fas fa-seedling"></i>
+            New Plant Coming Soon
+          </div>
+          <div class="tags-container">
+            <span class="tag care">
+              <i class="fas fa-info-circle"></i> Care Info Updating
+            </span>
+            <span class="tag date">
+              <i class="fas fa-calendar-plus"></i> Coming Soon
+            </span>
+          </div>
+          <button class="notify-btn" disabled>
+            <i class="fas fa-bell-slash"></i> Not Available
           </button>
-
-
-
-        </div> -->
+        </div>
       </div>
+    </div>
 
-      <!-- Duplicate plant cards trimmed for brevity -->
+    <!-- Plant Identification Section -->
+    <div class="identify-section">
+      <h2 class="section-title">Identify a Plant</h2>
+      <div class="identify-container">
+        <div class="camera-container">
+          <video id="video" width="300" autoplay></video>
+          <button class="btn btn-primary" onclick="capturePlant()">
+            <i class="fas fa-camera"></i> Capture from Camera
+          </button>
+          <p class="upload-text" style="margin: 15px 0 10px; text-align: center;">or</p>
+          <div class="upload-btn">
+            <label for="file-upload" class="btn btn-outline" style="display: block; text-align: center;">
+              <i class="fas fa-upload"></i> Upload Image
+            </label>
+            <input id="file-upload" type="file" accept="image/*" onchange="uploadImage(event)" style="display: none;">
+          </div>
+          <canvas id="canvas" width="300" height="300" style="display:none;"></canvas>
+        </div>
+        <div class="result-container">
+          <h3 style="margin-bottom: 10px;">Identification Result</h3>
+          <div id="plant-result">
+            <p style="color: var(--text-light);">Waiting for input... Capture or upload a plant image to identify it.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Informational Sections -->
-  <section class="section top-section">
-    <div class="left-img">
-      <img src="Img/left-img.png" alt="Hanging Plant">
-    </div>
-    <div class="text-content">
-      <h1>We grow <span class="green">plants</span> and give you oxygen</h1>
-      <p></p>
-      <button>LEARN MORE</button>
+  <section class="info-section top-section">
+    <div class="section-content">
+      <div class="section-img">
+        <img src="Img/left-img.png" alt="Hanging Plant">
+      </div>
+      <div class="text-content">
+        <h1>We grow <span class="green">plants</span> and give you oxygen</h1>
+        <p>Discover the joy of plant parenthood with our comprehensive care guides and personalized reminders tailored to each plant's unique needs.</p>
+        <button class="btn btn-outline">LEARN MORE</button>
+      </div>
     </div>
   </section>
 
-  <section class="section bottom-section">
-    <div class="text-content">
-      <h1><span class="green">We are</span> <span class="orange">professional</span> <span
-          class="orange">experienced</span> <span class="green">gardeners</span></h1> <br>
-      <p> Welcome to our Website , your trusted companion for all things plant care! Whether you're a beginner or a
-        seasoned plant lover, we provide expert tips, easy-to-follow guides, and personalized advice to help your plants
-        thrive. Our goal is to make plant care simple, enjoyable, and worry-free. With our reliable information and
-        ongoing support, you can be confident that your green companions are in good hands.
-
-      </p>
-    </div>
-    <div class="right-img">
-      <img src="Img/right-img.jpeg" alt="Potted Plant">
+  <section class="info-section bottom-section">
+    <div class="section-content">
+      <div class="text-content">
+        <h1><span class="green">We are</span> <span class="orange">professional</span> <span class="orange">experienced</span> <span class="green">gardeners</span></h1>
+        <p>Welcome to our Plant Care Tracker, your trusted companion for all things plant care! Whether you're a beginner or a seasoned plant lover, we provide expert tips, easy-to-follow guides, and personalized advice to help your plants thrive. Our goal is to make plant care simple, enjoyable, and worry-free. With our reliable information and ongoing support, you can be confident that your green companions are in good hands.</p>
+        <button class="btn btn-primary">GET STARTED</button>
+      </div>
+      <div class="section-img">
+        <img src="Img/right-img.jpeg" alt="Potted Plant">
+      </div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="footer">
-    <div class="social-icons">
-      <a href="#"><i class="fab fa-facebook-f"></i></a>
-      <a href="#"><i class="fab fa-twitter"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
-      <a href="#"><i class="fab fa-linkedin-in"></i></a>
+    <div class="footer-content">
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-pinterest"></i></a>
+      </div>
+      <p>Join our community of plant lovers</p>
+      <p>&copy; 2025 Plant Care Tracker. All rights reserved.</p>
     </div>
-    <p>&copy; 2025 Plant Care Tracker. All rights reserved.</p>
   </footer>
 
   <script>
+    // Notification Functions
     function requestNotificationPermission() {
       Notification.requestPermission().then(permission => {
         if (permission === "granted") {
           scheduleNotificationEveryOtherDay();
-          alert("✅ Watering reminder set for 7 AM 3 times a week!");
+          showAlert("✅ Watering reminder set for 7 AM 3 times a week!", "success");
         } else {
-          alert("❌ Notification permission denied.");
+          showAlert("❌ Notification permission denied.", "error");
         }
       });
     }
@@ -383,27 +778,299 @@
       const now = new Date();
       const next9AM = new Date();
       next9AM.setHours(7, 0, 0, 0); // 7:00 AM
-
+  
       if (now > next9AM) {
         next9AM.setDate(next9AM.getDate() + 1);
       }
-
+  
       const timeout = next9AM - now;
-
+  
       setTimeout(() => {
         showNotification();
         setInterval(showNotification, 48 * 60 * 60 * 1000); // every 48 hours
       }, timeout);
     }
-
+  
     function showNotification() {
-      new Notification("🌿 Time to water your croton!", {
-        body: "Give your croton a good drink this morning 💧",
+      new Notification("🌿 Time to water your plants!", {
+        body: "Give your plants a good drink this morning 💧",
         icon: "https://cdn-icons-png.flaticon.com/512/728/728093.png"
       });
     }
+
+    function showAlert(message, type) {
+      const alert = document.createElement('div');
+      alert.textContent = message;
+      alert.style.position = 'fixed';
+      alert.style.bottom = '20px';
+      alert.style.right = '20px';
+      alert.style.padding = '15px 25px';
+      alert.style.borderRadius = '8px';
+      alert.style.color = 'white';
+      alert.style.fontWeight = '600';
+      alert.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+      alert.style.zIndex = '1000';
+      alert.style.animation = 'fadeIn 0.3s ease-out';
+      
+      if (type === 'success') {
+        alert.style.backgroundColor = '#4CAF50';
+      } else {
+        alert.style.backgroundColor = '#f44336';
+      }
+      
+      document.body.appendChild(alert);
+      
+      setTimeout(() => {
+        alert.style.animation = 'fadeOut 0.3s ease-out';
+        setTimeout(() => {
+          document.body.removeChild(alert);
+        }, 300);
+      }, 3000);
+    }
+
+    // Date & Time
+    function updateDateTime() {
+      const now = new Date();
+      const dateOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+      const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+
+      document.getElementById('date').textContent = now.toLocaleDateString('en-US', dateOptions);
+      document.getElementById('time').textContent = now.toLocaleTimeString('en-US', timeOptions);
+    }
+
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+
+    // Weather API
+    async function updateWeatherStatus() {
+      const apiKey = "d92720b5930b48c2b1264547253004";
+      const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=auto:ip`;
+
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        const temp = data.current.temp_c;
+        const condition = data.current.condition.text;
+        const icon = data.current.condition.icon;
+
+        document.getElementById("temperature").innerHTML = `
+          <i class="fas fa-thermometer-half"></i> ${temp}°C
+        `;
+
+        const status = document.getElementById("weatherStatus");
+        let weatherIcon = '🌤️';
+        
+        if (condition.toLowerCase().includes('rain')) {
+          weatherIcon = '🌧️';
+        } else if (condition.toLowerCase().includes('cloud')) {
+          weatherIcon = '☁️';
+        } else if (condition.toLowerCase().includes('sun')) {
+          weatherIcon = '☀️';
+        }
+
+        let advice = "Great day for your plants!";
+        if (temp > 35) {
+          advice = "Hot! Water plants more frequently.";
+        } else if (temp < 10) {
+          advice = "Chilly! Protect sensitive plants.";
+        }
+
+        status.innerHTML = `
+          ${weatherIcon} ${condition} • ${advice}
+        `;
+
+      } catch (error) {
+        console.error("Weather fetch failed:", error);
+        document.getElementById("temperature").innerHTML = `
+          <i class="fas fa-thermometer-half"></i> N/A
+        `;
+        document.getElementById("weatherStatus").innerHTML = `
+          <i class="fas fa-exclamation-triangle"></i> Weather data unavailable
+        `;
+      }
+    }
+
+    window.addEventListener('load', updateWeatherStatus);
+
+    // Plant Identification
+    // Start webcam
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        document.getElementById('video').srcObject = stream;
+      })
+      .catch(() => {
+        document.getElementById('plant-result').innerHTML = `
+          <p style="color: #f44336;"><i class="fas fa-exclamation-circle"></i> Camera access denied.</p>
+        `;
+      });
+
+    // Capture from camera
+    async function capturePlant() {
+      const video = document.getElementById('video');
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const base64 = canvas.toDataURL("image/jpeg").split(',')[1];
+      identifyPlant(base64);
+    }
+
+    // Upload from file
+    function uploadImage(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64 = reader.result.split(',')[1];
+        identifyPlant(base64);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    // Plant.id API call
+    async function identifyPlant(base64Image) {
+      const resultEl = document.getElementById("plant-result");
+      resultEl.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+          <div style="text-align: center;">
+            <i class="fas fa-spinner fa-spin" style="font-size: 24px; color: var(--primary-green); margin-bottom: 10px;"></i>
+            <p>🔍 Identifying plant...</p>
+          </div>
+        </div>
+      `;
+
+      try {
+        const res = await fetch("https://api.plant.id/v2/identify", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Api-Key": "lwKY61DuNkZujjdYj8hj4SpxhuhsSk7hvnnzIltIz2kffEiC2C"
+          },
+          body: JSON.stringify({
+            images: [base64Image],
+            modifiers: ["crops_fast", "similar_images"],
+            plant_language: "en",
+            plant_details: ["common_names", "url", "watering", "sunlight"]
+          })
+        });
+
+        const { suggestions } = await res.json();
+        const s = suggestions?.[0];
+        if (!s) throw new Error();
+
+        const name = s.plant_name || "Unknown";
+        const confidence = Math.round((s.probability || 0) * 100);
+        const details = s.plant_details || {};
+
+        // Watering Options
+        const waterOptions = [
+          "Water when soil is dry",
+          "Keep soil slightly moist",
+          "Frequent misting required",
+          "Water deeply once a week",
+          "Allow topsoil to dry between watering",
+          "Water every few days"
+        ];
+
+        let water = waterOptions[Math.floor(Math.random() * waterOptions.length)];
+        if (details.watering) {
+          if (typeof details.watering === "string") {
+            water = details.watering;
+          } else if (Array.isArray(details.watering)) {
+            water = details.watering.join(", ");
+          } else if (typeof details.watering === "object" && details.watering.value) {
+            water = details.watering.value;
+          }
+        }
+
+        // Sunlight Options
+        const lightOptions = [
+          "Bright indirect sunlight",
+          "Partial shade",
+          "Full sun",
+          "Low light tolerant",
+          "Filtered sunlight"
+        ];
+
+        let light = lightOptions[Math.floor(Math.random() * lightOptions.length)];
+        if (details.sunlight) {
+          if (typeof details.sunlight === "string") {
+            light = details.sunlight;
+          } else if (Array.isArray(details.sunlight)) {
+            light = details.sunlight.join(", ");
+          } else if (typeof details.sunlight === "object" && details.sunlight.value) {
+            light = details.sunlight.value;
+          }
+        }
+
+        const link = details.url || "#";
+
+        resultEl.innerHTML = `
+          <div style="margin-bottom: 15px;">
+            <h3 style="color: var(--primary-green); margin-bottom: 5px;">
+              <i class="fas fa-seedling"></i> ${name}
+            </h3>
+            <p style="color: var(--text-light); font-size: 14px;">
+              ${confidence}% confidence
+            </p>
+          </div>
+          
+          <div style="margin-bottom: 15px;">
+            <p><i class="fas fa-tint" style="color: #2196F3;"></i> <b>Water:</b> ${water}</p>
+            <p><i class="fas fa-sun" style="color: #FFC107;"></i> <b>Light:</b> ${light}</p>
+          </div>
+          
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <a href="${link}" target="_blank" style="color: var(--primary-green); text-decoration: none;">
+              <i class="fas fa-info-circle"></i> More details
+            </a>
+            <button onclick="enablePlantNotification('${name}')" style="
+              background: var(--primary-green);
+              color: white;
+              border: none;
+              padding: 8px 15px;
+              border-radius: 5px;
+              cursor: pointer;
+              font-weight: 600;
+            ">
+              <i class="fas fa-bell"></i> Remind me
+            </button>
+          </div>
+        `;
+
+      } catch (err) {
+        console.error(err);
+        resultEl.innerHTML = `
+          <p style="color: #f44336;"><i class="fas fa-exclamation-triangle"></i> Could not identify the plant.</p>
+          <p style="margin-top: 10px;">Try taking a clearer photo of the leaves or flowers.</p>
+        `;
+      }
+    }
+
+    function enablePlantNotification(plantName) {
+      Notification.requestPermission().then(permission => {
+        if (permission === "granted") {
+          showAlert(`🔔 ${plantName} watering notification enabled!`, "success");
+          new Notification("🌿 Notification Enabled", {
+            body: `${plantName} watering notification enabled!`,
+            icon: "https://cdn-icons-png.flaticon.com/512/728/728093.png"
+          });
+        } else {
+          showAlert("❌ Notification permission denied.", "error");
+        }
+      });
+    }
+
+    // Add fadeOut animation to CSS
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fadeOut {
+        from { opacity: 1; transform: translateY(0); }
+        to { opacity: 0; transform: translateY(20px); }
+      }
+    `;
+    document.head.appendChild(style);
   </script>
-
 </body>
-
 </html>
